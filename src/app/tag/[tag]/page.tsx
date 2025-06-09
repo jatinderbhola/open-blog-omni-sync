@@ -19,8 +19,9 @@ export async function generateMetadata({ params }: TagPageProps) {
 }
 
 export default async function TagPage({ params }: TagPageProps) {
+    const decodedTag = decodeURIComponent(params.tag);
     const [posts, tags] = await Promise.all([
-        getPostsByTag(params.tag),
+        getPostsByTag(decodedTag),
         getAllTags(),
     ]);
 
@@ -32,13 +33,13 @@ export default async function TagPage({ params }: TagPageProps) {
                     <div className="flex flex-col gap-8">
                         <div className="flex flex-col gap-4">
                             <h1 className="text-4xl font-bold tracking-tight">
-                                Posts tagged with &quot;{params.tag}&quot;
+                                Posts tagged with &quot;{decodedTag}&quot;
                             </h1>
                             <p className="text-xl text-muted-foreground">
-                                Browse all blog posts tagged with &quot;{params.tag}&quot;.
+                                Browse all blog posts tagged with &quot;{decodedTag}&quot;.
                             </p>
                         </div>
-                        <TagFilter tags={tags} selectedTag={params.tag} />
+                        <TagFilter tags={tags} selectedTag={decodedTag} />
                         <BlogList posts={posts} />
                     </div>
                 </section>
