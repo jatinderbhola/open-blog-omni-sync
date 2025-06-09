@@ -1,12 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['localhost'],
+        dangerouslyAllowSVG: true,
+        contentDispositionType: 'attachment',
+        contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
         remotePatterns: [
             {
                 protocol: 'https',
                 hostname: '**',
             },
+            {
+                protocol: 'https',
+                hostname: 'api.dicebear.com',
+            }
         ],
     },
     // Enable static exports for RSS feed
