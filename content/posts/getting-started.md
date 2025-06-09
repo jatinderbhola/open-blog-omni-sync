@@ -4,7 +4,7 @@ description: "Learn how to create a blog using Next.js and Markdown files."
 date: "2025-05-08"
 tags: ["nextjs", "markdown", "tutorial"]
 published: true
-featured: true
+featured: false
 author: "Jatinder (Jay) Bhola"
 ---
 
