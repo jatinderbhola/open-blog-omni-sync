@@ -52,14 +52,14 @@ All platform adapters extend the `BasePlatformAdapter` class:
 
 ```typescript
 abstract class BasePlatformAdapter implements PlatformAdapter {
-  protected config: PlatformConfig;
+	protected config: PlatformConfig;
 
-  constructor(config: PlatformConfig) {
-    this.config = config;
-  }
+	constructor(config: PlatformConfig) {
+		this.config = config;
+	}
 
-  abstract publish(post: Post): Promise<PublishResult>;
-  abstract getRequiredConfigFields(): string[];
+	abstract publish(post: Post): Promise<PublishResult>;
+	abstract getRequiredConfigFields(): string[];
 }
 ```
 
@@ -67,12 +67,12 @@ abstract class BasePlatformAdapter implements PlatformAdapter {
 
 ```typescript
 interface PlatformConfig {
-  name: string;
-  enabled: boolean;
-  apiKey?: string;
-  apiSecret?: string;
-  userId?: string;
-  redirectUri?: string;
+	name: string;
+	enabled: boolean;
+	apiKey?: string;
+	apiSecret?: string;
+	userId?: string;
+	redirectUri?: string;
 }
 ```
 
@@ -80,10 +80,10 @@ interface PlatformConfig {
 
 ```typescript
 interface PublishResult {
-  success: boolean;
-  url?: string;
-  error?: string;
-  platformName: string;
+	success: boolean;
+	url?: string;
+	error?: string;
+	platformName: string;
 }
 ```
 
@@ -130,21 +130,21 @@ const metadata = generateMetadata('Page Title', 'Page Description');
 
 ```typescript
 interface Post {
-  title: string;
-  description: string;
-  date: string;
-  tags: string[];
-  published: boolean;
-  featured?: boolean;
-  author: string;
-  slug: string;
-  content: string;
-  readingTime: {
-    text: string;
-    minutes: number;
-    time: number;
-    words: number;
-  };
+	title: string;
+	description: string;
+	date: string;
+	tags: string[];
+	published: boolean;
+	featured?: boolean;
+	author: string;
+	slug: string;
+	content: string;
+	readingTime: {
+		text: string;
+		minutes: number;
+		time: number;
+		words: number;
+	};
 }
 ```
 
@@ -152,15 +152,15 @@ interface Post {
 
 ```typescript
 interface PostMeta {
-  title: string;
-  description: string;
-  date: string;
-  slug: string;
-  tags: string[];
-  author: string;
-  readingTime: {
-    text: string;
-  };
+	title: string;
+	description: string;
+	date: string;
+	slug: string;
+	tags: string[];
+	author: string;
+	readingTime: {
+		text: string;
+	};
 }
 ```
 
@@ -183,12 +183,12 @@ Example error handling:
 
 ```typescript
 try {
-  const post = await getPostBySlug('non-existent');
-  if (!post) {
-    // Handle not found case
-  }
+	const post = await getPostBySlug('non-existent');
+	if (!post) {
+		// Handle not found case
+	}
 } catch (error) {
-  // Handle other errors
-  console.error('Failed to fetch post:', error);
+	// Handle other errors
+	console.error('Failed to fetch post:', error);
 }
-``` 
+```

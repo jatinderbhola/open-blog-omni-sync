@@ -2,28 +2,34 @@ import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { SITE_CONFIG } from '@/lib/constants';
 
 function escapeXml(unsafe: string): string {
-  return unsafe.replace(/[<>&'"]/g, (c) => {
-    switch (c) {
-      case '<': return '&lt;';
-      case '>': return '&gt;';
-      case '&': return '&amp;';
-      case '\'': return '&apos;';
-      case '"': return '&quot;';
-      default: return c;
-    }
-  });
+	return unsafe.replace(/[<>&'"]/g, (c) => {
+		switch (c) {
+			case '<':
+				return '&lt;';
+			case '>':
+				return '&gt;';
+			case '&':
+				return '&amp;';
+			case "'":
+				return '&apos;';
+			case '"':
+				return '&quot;';
+			default:
+				return c;
+		}
+	});
 }
 
 export async function GET() {
-  const posts = await getAllPosts();
-  const fullPosts = await Promise.all(
-    posts.map(async (post) => {
-      const fullPost = await getPostBySlug(post.slug);
-      return fullPost;
-    })
-  );
+	const posts = await getAllPosts();
+	const fullPosts = await Promise.all(
+		posts.map(async (post) => {
+			const fullPost = await getPostBySlug(post.slug);
+			return fullPost;
+		})
+	);
 
-  const rssXml = `<?xml version="1.0" encoding="UTF-8"?>
+	const rssXml = `<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="/rss-styles.xsl" type="text/xsl"?>
 <rss version="2.0" 
     xmlns:atom="http://www.w3.org/2005/Atom"
@@ -40,9 +46,9 @@ export async function GET() {
     <generator>Next.js RSS Generator</generator>
     <ttl>60</ttl>
     ${fullPosts
-      .filter(post => post !== null)
-      .map(
-        (post) => `
+			.filter((post) => post !== null)
+			.map(
+				(post) => `
     <item>
       <title>${escapeXml(post!.title)}</title>
       <link>${SITE_CONFIG.url}/blog/${post!.slug}</link>
@@ -54,16 +60,16 @@ export async function GET() {
       <content:encoded><![CDATA[${post!.content}]]></content:encoded>
       <comments>${SITE_CONFIG.url}/blog/${post!.slug}#comments</comments>
     </item>`
-      )
-      .join('\n')}
+			)
+			.join('\n')}
   </channel>
 </rss>`;
 
-  return new Response(rssXml, {
-    headers: {
-      'Content-Type': 'application/xml; charset=utf-8',
-      'Cache-Control': 's-maxage=3600, stale-while-revalidate',
-      'X-Content-Type-Options': 'nosniff',
-    },
-  });
-} 
+	return new Response(rssXml, {
+		headers: {
+			'Content-Type': 'application/xml; charset=utf-8',
+			'Cache-Control': 's-maxage=3600, stale-while-revalidate',
+			'X-Content-Type-Options': 'nosniff'
+		}
+	});
+}

@@ -1,11 +1,11 @@
 ---
-title: "Getting Started with Next.js and Markdown"
-description: "Learn how to create a blog using Next.js and Markdown files."
-date: "2025-05-08"
-tags: ["nextjs", "markdown", "tutorial"]
+title: 'Getting Started with Next.js and Markdown'
+description: 'Learn how to create a blog using Next.js and Markdown files.'
+date: '2025-05-08'
+tags: ['nextjs', 'markdown', 'tutorial']
 published: true
 featured: false
-author: "Jatinder (Jay) Bhola"
+author: 'Jatinder (Jay) Bhola'
 ---
 
 Next.js is a powerful React framework that makes it easy to build fast, modern websites. In this post, we'll explore how to create a blog using Next.js and Markdown files.
@@ -47,18 +47,16 @@ import { remark } from 'remark';
 import html from 'remark-html';
 
 export async function getPostBySlug(slug: string) {
-  const fullPath = path.join(process.cwd(), 'posts', `${slug}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { data, content } = matter(fileContents);
-  
-  const processedContent = await remark()
-    .use(html)
-    .process(content);
-  
-  return {
-    ...data,
-    content: processedContent.toString(),
-  };
+	const fullPath = path.join(process.cwd(), 'posts', `${slug}.md`);
+	const fileContents = fs.readFileSync(fullPath, 'utf8');
+	const { data, content } = matter(fileContents);
+
+	const processedContent = await remark().use(html).process(content);
+
+	return {
+		...data,
+		content: processedContent.toString()
+	};
 }
 ```
 
@@ -68,12 +66,12 @@ We're using Tailwind CSS for styling. Here's an example of a styled blog post:
 
 ```jsx
 export function BlogPost({ post }) {
-  return (
-    <article className="prose prose-neutral dark:prose-invert">
-      <h1>{post.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: post.content }} />
-    </article>
-  );
+	return (
+		<article className="prose prose-neutral dark:prose-invert">
+			<h1>{post.title}</h1>
+			<div dangerouslySetInnerHTML={{ __html: post.content }} />
+		</article>
+	);
 }
 ```
 
@@ -91,4 +89,4 @@ Now that you have the basics set up, you can:
 
 Building a blog with Next.js and Markdown is a great way to create a fast, maintainable website. The combination of static site generation and dynamic features makes it perfect for content-focused sites.
 
-Remember to check out the [Next.js documentation](https://nextjs.org/docs) for more information and advanced features. 
+Remember to check out the [Next.js documentation](https://nextjs.org/docs) for more information and advanced features.

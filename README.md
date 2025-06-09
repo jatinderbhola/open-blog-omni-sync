@@ -53,12 +53,14 @@ If you find this project useful or interesting:
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/jatinderbhola/open-blog-omni-sync.git
 cd open-blog-omni-sync
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 # or
@@ -66,11 +68,13 @@ yarn install
 ```
 
 3. Create a `.env` file based on `.env.example`:
+
 ```bash
 cp .env.example .env
 ```
 
 4. Start the development server:
+
 ```bash
 npm run dev
 # or
@@ -110,11 +114,13 @@ The project includes a complete set of favicons for various devices and platform
 To generate new favicons:
 
 1. Install dependencies:
+
 ```bash
 npm install sharp --save-dev
 ```
 
 2. Run the favicon generation script:
+
 ```bash
 node scripts/generate-favicon.js
 ```
@@ -127,27 +133,30 @@ Create markdown files in `content/posts/` with the following frontmatter:
 
 ```yaml
 ---
-title: "Your Blog Post Title"
-description: "Brief description for SEO"
-date: "2024-01-15"
-tags: ["nextjs", "react", "programming"]
+title: 'Your Blog Post Title'
+description: 'Brief description for SEO'
+date: '2024-01-15'
+tags: ['nextjs', 'react', 'programming']
 published: true
 featured: false
-author: "Your Name"
+author: 'Your Name'
 ---
 ```
 
 ## Platform Integration
 
 ### RSS Feed
+
 - Automatically generated at `/feed.xml`
 - Includes post metadata and content
 
 ### LinkedIn (Coming Soon)
+
 - Configure LinkedIn API credentials in `.env`
 - Posts will be published to your LinkedIn profile
 
 ### Medium (Coming Soon)
+
 - Configure Medium API token in `.env`
 - Posts will be published to your Medium account
 
@@ -181,6 +190,7 @@ author: "Your Name"
 ### Other Platforms
 
 Build the project:
+
 ```bash
 npm run build
 ```
@@ -208,22 +218,22 @@ This project is designed to be easily forked and customized. To update the autho
 
 ```typescript
 export const AUTHOR_CONFIG = {
-    name: 'Your Name',
-    email: 'your.email@example.com',
-    website: 'https://yourwebsite.com',
-    github: 'https://github.com/yourusername',
-    linkedin: 'https://linkedin.com/in/yourusername',
-    bio: 'Your professional bio',
-    location: 'Your Location',
-    avatar: {
-        type: 'generated',
-        style: 'pixel-art',
-    },
-    social: {
-        github: 'yourusername',
-        linkedin: 'yourusername',
-        twitter: 'yourusername',
-    },
+	name: 'Your Name',
+	email: 'your.email@example.com',
+	website: 'https://yourwebsite.com',
+	github: 'https://github.com/yourusername',
+	linkedin: 'https://linkedin.com/in/yourusername',
+	bio: 'Your professional bio',
+	location: 'Your Location',
+	avatar: {
+		type: 'generated',
+		style: 'pixel-art'
+	},
+	social: {
+		github: 'yourusername',
+		linkedin: 'yourusername',
+		twitter: 'yourusername'
+	}
 };
 ```
 
@@ -232,6 +242,7 @@ export const AUTHOR_CONFIG = {
 You can choose from two types of avatars:
 
 1. **Custom Avatar**
+
    - Upload your image to `public/images/` directory
    - Set `avatar.type` to `'custom'`
    - Specify the path in `avatar.customPath`
@@ -247,6 +258,7 @@ You can choose from two types of avatars:
    - The avatar will be automatically generated based on your name
 
 Generated avatars are powered by:
+
 - [DiceBear](https://www.dicebear.com/) - For most styles
 - [UI Avatars](https://ui-avatars.com/) - For initials style
 
@@ -255,4 +267,4 @@ Generated avatars are powered by:
 - **Name:** Jatinder (Jay) Bhola
 - **Website:** [jatinderbhola.com](https://jatinderbhola.com)
 - **GitHub:** [@jatinderbhola](https://github.com/jatinderbhola)
-- **LinkedIn:** [@jatinderbhola](https://www.linkedin.com/in/jatinderbhola) 
+- **LinkedIn:** [@jatinderbhola](https://www.linkedin.com/in/jatinderbhola)
