@@ -9,6 +9,31 @@ import { Post, PostFrontmatter, PostMeta, PostStatus } from '@/types/blog';
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 const draftsDirectory = path.join(process.cwd(), 'content/drafts');
 
+function validateFrontmatter(data: Record<string, unknown>): PostFrontmatter {
+    if (
+        typeof data.title !== 'string' ||
+        typeof data.description !== 'string' ||
+        typeof data.date !== 'string' ||
+        !Array.isArray(data.tags) ||
+        typeof data.published !== 'boolean' ||
+        typeof data.author !== 'string' ||
+        (data.featured !== undefined && typeof data.featured !== 'boolean')
+    ) {
+        throw new Error('Invalid frontmatter format');
+    }
+
+    return {
+        title: data.title,
+        description: data.description,
+        date: data.date,
+        tags: data.tags,
+        published: data.published,
+        featured: data.featured,
+        author: data.author,
+        slug: '' // Will be set by the calling function
+    };
+}
+
 export async function getPostBySlug(slug: string, status: PostStatus = 'published'): Promise<Post | null> {
     const directory = status === 'published' ? postsDirectory : draftsDirectory;
     const fullPath = path.join(directory, `${slug}.md`);
@@ -25,12 +50,12 @@ export async function getPostBySlug(slug: string, status: PostStatus = 'publishe
         .process(content);
     const contentHtml = processedContent.toString();
 
-    const frontmatter = data as PostFrontmatter;
+    const frontmatter = validateFrontmatter(data);
+    frontmatter.slug = slug;
     const stats = readingTime(content);
 
     return {
         ...frontmatter,
-        slug,
         content: contentHtml,
         readingTime: stats,
     };
@@ -49,14 +74,15 @@ export async function getAllPosts(status: PostStatus = 'published'): Promise<Pos
                 const fileContents = fs.readFileSync(fullPath, 'utf8');
                 const { data, content } = matter(fileContents);
                 const stats = readingTime(content);
+                const frontmatter = validateFrontmatter(data);
 
                 return {
-                    title: data.title,
-                    description: data.description,
-                    date: data.date,
+                    title: frontmatter.title,
+                    description: frontmatter.description,
+                    date: frontmatter.date,
                     slug,
-                    tags: data.tags,
-                    author: data.author,
+                    tags: frontmatter.tags,
+                    author: frontmatter.author,
                     readingTime: {
                         text: stats.text,
                     },
@@ -79,7 +105,7 @@ export function getAllTags(): Record<string, number> {
         .map((filename) => {
             const fileContents = fs.readFileSync(path.join(postsDirectory, filename), 'utf8');
             const { data } = matter(fileContents);
-            return (data as PostFrontmatter).tags || [];
+            return validateFrontmatter(data).tags;
         });
 
     const tagCounts: Record<string, number> = {};
@@ -92,9 +118,9 @@ export function getAllTags(): Record<string, number> {
 export function getFeaturedPosts(): Promise<PostMeta[]> {
     return getAllPosts().then(posts =>
         posts.filter(post => {
-            const fullPost = matter(
-                fs.readFileSync(path.join(postsDirectory, `${post.slug}.md`), 'utf8')
-            ).data as PostFrontmatter;
+            const fullPost = validateFrontmatter(
+                matter(fs.readFileSync(path.join(postsDirectory, `${post.slug}.md`), 'utf8')).data
+            );
             return fullPost.featured;
         })
     );

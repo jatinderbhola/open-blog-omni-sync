@@ -1,26 +1,39 @@
 declare module 'gray-matter' {
-    interface GrayMatterFile<T = any> {
+    interface GrayMatterFile<T = Record<string, unknown>> {
         data: T;
         content: string;
         excerpt?: string;
         orig: string;
     }
 
+    interface GrayMatterOptions {
+        excerpt?: boolean;
+        excerpt_separator?: string;
+        engines?: Record<string, unknown>;
+        language?: string;
+        delimiters?: string[];
+    }
+
     function matter(
         input: string,
-        options?: any
+        options?: GrayMatterOptions
     ): GrayMatterFile;
 
     export = matter;
 }
 
 declare module 'remark' {
-    function remark(): any;
+    interface RemarkInstance {
+        use: (plugin: unknown, ...args: unknown[]) => RemarkInstance;
+        process: (content: string) => Promise<{ contents: string }>;
+    }
+    function remark(): RemarkInstance;
     export { remark };
 }
 
 declare module 'remark-html' {
-    const html: any;
+    import { Plugin } from 'unified';
+    const html: Plugin;
     export default html;
 }
 

@@ -67,10 +67,10 @@ export function getAvatarUrl(config: typeof AUTHOR_CONFIG.avatar, name: string):
     const encodedName = encodeURIComponent(name);
 
     switch (style) {
-        case 'initials':
-            // Use UI Avatars for initials
+        case 'initials': {
             const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
             return `https://ui-avatars.com/api/?name=${initials}&background=random`;
+        }
         case 'avataaars':
             return `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodedName}`;
         case 'bottts':

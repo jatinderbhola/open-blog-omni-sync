@@ -1,25 +1,25 @@
 import Link from 'next/link';
-import { Github, Twitter } from 'lucide-react';
+import { Github, Linkedin, Twitter } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/constants';
 
 export function Footer() {
     return (
-        <footer className="border-t bg-background">
+        <footer className="border-t">
             <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
                 <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-                    <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-                        Built with{' '}
+                    <p className="text-center text-sm leading-loose md:text-left">
+                        Built by{' '}
                         <Link
-                            href="https://nextjs.org"
+                            href={SITE_CONFIG.author.website}
                             target="_blank"
                             rel="noreferrer"
                             className="font-medium underline underline-offset-4"
                         >
-                            Next.js
+                            {SITE_CONFIG.author.name}
                         </Link>
                         . The source code is available on{' '}
                         <Link
-                            href={SITE_CONFIG.links.github}
+                            href={SITE_CONFIG.author.github}
                             target="_blank"
                             rel="noreferrer"
                             className="font-medium underline underline-offset-4"
@@ -29,9 +29,9 @@ export function Footer() {
                         .
                     </p>
                 </div>
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-1">
                     <Link
-                        href={SITE_CONFIG.links.github}
+                        href={SITE_CONFIG.author.github}
                         target="_blank"
                         rel="noreferrer"
                         className="rounded-2xl bg-muted p-2 hover:bg-muted/80"
@@ -39,14 +39,25 @@ export function Footer() {
                         <Github className="h-5 w-5" />
                         <span className="sr-only">GitHub</span>
                     </Link>
+                    {SITE_CONFIG.links.twitter && (
+                        <Link
+                            href={SITE_CONFIG.links.twitter}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="rounded-2xl bg-muted p-2 hover:bg-muted/80"
+                        >
+                            <Twitter className="h-5 w-5" />
+                            <span className="sr-only">Twitter</span>
+                        </Link>
+                    )}
                     <Link
-                        href={SITE_CONFIG.links.twitter}
+                        href={SITE_CONFIG.author.linkedin}
                         target="_blank"
                         rel="noreferrer"
                         className="rounded-2xl bg-muted p-2 hover:bg-muted/80"
                     >
-                        <Twitter className="h-5 w-5" />
-                        <span className="sr-only">Twitter</span>
+                        <Linkedin className="h-5 w-5" />
+                        <span className="sr-only">LinkedIn</span>
                     </Link>
                 </div>
             </div>

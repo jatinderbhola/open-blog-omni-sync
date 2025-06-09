@@ -16,6 +16,7 @@ export const metadata = {
         template: `%s | ${SITE_CONFIG.name}`,
     },
     description: SITE_CONFIG.description,
+    metadataBase: new URL(SITE_CONFIG.url),
     keywords: ['Blog', 'Next.js', 'React', 'TypeScript'],
     authors: [
         {

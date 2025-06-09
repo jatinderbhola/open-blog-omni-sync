@@ -1,6 +1,7 @@
 import { AUTHOR_CONFIG } from '@/config/author';
+import { SiteConfig } from '@/types/site';
 
-export const SITE_CONFIG = {
+export const SITE_CONFIG: SiteConfig = {
     name: 'Omni Sync - Blog',
     description: 'A modern blog platform with multi-platform publishing capabilities',
     url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',

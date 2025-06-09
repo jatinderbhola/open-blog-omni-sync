@@ -32,10 +32,10 @@ export default async function TagPage({ params }: TagPageProps) {
                     <div className="flex flex-col gap-8">
                         <div className="flex flex-col gap-4">
                             <h1 className="text-4xl font-bold tracking-tight">
-                                Posts tagged with "{params.tag}"
+                                Posts tagged with &quot;{params.tag}&quot;
                             </h1>
                             <p className="text-xl text-muted-foreground">
-                                Browse all blog posts tagged with "{params.tag}".
+                                Browse all blog posts tagged with &quot;{params.tag}&quot;.
                             </p>
                         </div>
                         <TagFilter tags={tags} selectedTag={params.tag} />

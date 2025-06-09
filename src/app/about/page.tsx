@@ -2,6 +2,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { AUTHOR_CONFIG } from '@/config/author';
 import { getAvatarUrl } from '@/lib/utils';
+import Image from 'next/image';
 
 export const metadata = {
     title: 'About',
@@ -18,12 +19,13 @@ export default function AboutPage() {
                 <section className="container py-10">
                     <div className="mx-auto max-w-3xl">
                         <div className="flex flex-col items-center gap-8 text-center">
-                            <img
+                            <Image
                                 src={avatarUrl}
                                 alt={AUTHOR_CONFIG.name}
                                 className="h-32 w-32 rounded-full"
                                 width={128}
                                 height={128}
+                                priority
                             />
                             <div className="space-y-2">
                                 <h1 className="text-4xl font-bold tracking-tight">
