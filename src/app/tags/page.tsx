@@ -1,17 +1,21 @@
-import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { getAllTags } from '@/lib/blog';
-import { cn } from '@/lib/utils';
+import { getAllTags, getPostsByTag } from '@/lib/blog';
+import { createMetadata } from '@/lib/utils';
 
-export const metadata = {
-    title: 'Tags',
-    description: 'Browse posts by tag',
-};
+export const metadata = createMetadata('Tags', 'Browse posts by tags');
 
 export default async function TagsPage() {
     const tags = await getAllTags();
-    const tagCounts = Object.entries(tags).sort((a, b) => b[1] - a[1]);
+    const tagCounts = await Promise.all(
+        tags.map(async (tag) => {
+            const posts = await getPostsByTag(tag);
+            return [tag, posts.length] as [string, number];
+        })
+    );
+
+    // Sort by post count in descending order
+    const sortedTags = tagCounts.sort((a, b) => b[1] - a[1]);
 
     return (
         <>
@@ -22,24 +26,21 @@ export default async function TagsPage() {
                         <div className="flex flex-col gap-4">
                             <h1 className="text-4xl font-bold tracking-tight">Tags</h1>
                             <p className="text-xl text-muted-foreground">
-                                Browse posts by topic
+                                Browse posts by tags.
                             </p>
                         </div>
-                        <div className="flex flex-wrap gap-4">
-                            {tagCounts.map(([tag, count]) => (
-                                <Link
+                        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                            {sortedTags.map(([tag, count]) => (
+                                <a
                                     key={tag}
                                     href={`/tag/${tag}`}
-                                    className={cn(
-                                        'inline-flex items-center rounded-lg bg-muted px-3 py-1 text-sm font-medium',
-                                        'hover:bg-muted/80 hover:text-accent-foreground'
-                                    )}
+                                    className="flex flex-col rounded-lg border p-4 hover:bg-muted/50"
                                 >
-                                    {tag}
-                                    <span className="ml-2 text-muted-foreground">
-                                        {count}
+                                    <span className="text-lg font-medium">#{tag}</span>
+                                    <span className="text-sm text-muted-foreground">
+                                        {count} {count === 1 ? 'post' : 'posts'}
                                     </span>
-                                </Link>
+                                </a>
                             ))}
                         </div>
                     </div>

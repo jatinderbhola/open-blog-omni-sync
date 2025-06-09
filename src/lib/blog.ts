@@ -99,7 +99,7 @@ export async function getPostsByTag(tag: string): Promise<PostMeta[]> {
     return posts.filter((post) => post.tags.includes(tag));
 }
 
-export function getAllTags(): Record<string, number> {
+export function getAllTags(): string[] {
     const posts = fs.readdirSync(postsDirectory)
         .filter((filename) => filename.endsWith('.md'))
         .map((filename) => {
@@ -108,11 +108,8 @@ export function getAllTags(): Record<string, number> {
             return validateFrontmatter(data).tags;
         });
 
-    const tagCounts: Record<string, number> = {};
-    posts.flat().forEach(tag => {
-        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-    });
-    return tagCounts;
+    // Get unique tags
+    return Array.from(new Set(posts.flat()));
 }
 
 export function getFeaturedPosts(): Promise<PostMeta[]> {

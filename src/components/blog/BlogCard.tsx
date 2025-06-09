@@ -28,16 +28,20 @@ export function BlogCard({ post }: BlogCardProps) {
                     {post.tags.length > 0 && (
                         <>
                             <span>·</span>
-                            <div className="flex items-center gap-2">
-                                {post.tags.map((tag) => (
+                            <div className="flex flex-wrap items-center gap-2 max-w-full">
+                                {post.tags.slice(0, 4).map((tag) => (
                                     <Link
                                         key={tag}
                                         href={`/tag/${tag}`}
-                                        className="hover:text-foreground"
+                                        className="rounded bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground hover:text-foreground border"
+                                        style={{ whiteSpace: 'nowrap' }}
                                     >
                                         #{tag}
                                     </Link>
                                 ))}
+                                {post.tags.length > 4 && (
+                                    <span className="text-xs text-muted-foreground">+{post.tags.length - 4} more</span>
+                                )}
                             </div>
                         </>
                     )}
