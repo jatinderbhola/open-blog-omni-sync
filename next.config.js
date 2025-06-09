@@ -14,11 +14,11 @@ const nextConfig = {
         return [
             {
                 source: '/feed.xml',
-                destination: '/api/rss',
+                destination: '/rss.xml',
             },
             {
                 source: '/rss',
-                destination: '/api/rss',
+                destination: '/rss.xml',
             },
         ]
     },

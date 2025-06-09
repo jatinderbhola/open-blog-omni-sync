@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { NAVIGATION, SITE_CONFIG } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/shared/ThemeToggle';
+import { RSSIcon } from '@/components/shared/RSSIcon';
 
 export function Header() {
     return (
@@ -26,7 +27,17 @@ export function Header() {
                         ))}
                     </nav>
                 </div>
-                <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+                <div className="flex flex-1 items-center justify-between space-x-4 md:justify-end">
+                    <Link
+                        href="/feed.xml"
+                        className="text-foreground/60 transition-colors hover:text-foreground/80"
+                        title="RSS Feed"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <RSSIcon className="h-5 w-5" />
+                        <span className="sr-only">RSS Feed</span>
+                    </Link>
                     <ThemeToggle />
                 </div>
             </div>

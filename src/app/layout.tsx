@@ -17,6 +17,20 @@ export const metadata = {
     },
     description: SITE_CONFIG.description,
     metadataBase: new URL(SITE_CONFIG.url),
+    alternates: {
+        types: {
+            'application/rss+xml': [
+                {
+                    url: '/feed.xml',
+                    title: `${SITE_CONFIG.name} RSS Feed`,
+                },
+                {
+                    url: '/rss',
+                    title: `${SITE_CONFIG.name} RSS Feed (Alternative)`,
+                },
+            ],
+        },
+    },
     keywords: ['Blog', 'Next.js', 'React', 'TypeScript'],
     authors: [
         {
