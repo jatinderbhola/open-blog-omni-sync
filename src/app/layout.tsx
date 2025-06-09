@@ -30,8 +30,21 @@ export const metadata = {
                 },
             ],
         },
+        canonical: SITE_CONFIG.url,
     },
-    keywords: ['Blog', 'Next.js', 'React', 'TypeScript'],
+    keywords: [
+        'Jatinder Bhola',
+        'Jay Bhola',
+        'Tech Blog',
+        'Software Engineering',
+        'Web Development',
+        'Next.js',
+        'React',
+        'TypeScript',
+        'Software Architecture',
+        'Technology Blog',
+        'Programming Tutorials',
+    ],
     authors: [
         {
             name: SITE_CONFIG.author.name,
@@ -39,6 +52,18 @@ export const metadata = {
         },
     ],
     creator: SITE_CONFIG.author.name,
+    publisher: SITE_CONFIG.author.name,
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
+    },
     openGraph: {
         type: 'website',
         locale: 'en_US',
@@ -61,6 +86,11 @@ export const metadata = {
         description: SITE_CONFIG.description,
         images: [SITE_CONFIG.ogImage],
         creator: '@' + SITE_CONFIG.author.social.twitter,
+    },
+    verification: {
+        google: 'add-your-google-site-verification',
+        yandex: 'add-your-yandex-verification',
+        bing: 'add-your-bing-verification',
     },
     icons: {
         icon: [

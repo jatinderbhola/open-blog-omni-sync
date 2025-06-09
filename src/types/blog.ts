@@ -7,6 +7,8 @@ export interface PostFrontmatter {
     featured?: boolean;
     author: string;
     slug: string;
+    coverImage?: string;
+    excerpt?: string;
 }
 
 export interface Post extends PostFrontmatter {
