@@ -1,0 +1,57 @@
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+    images: {
+        domains: ['localhost'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: '**',
+            },
+        ],
+    },
+    // Enable static exports for RSS feed
+    async rewrites() {
+        return [
+            {
+                source: '/feed.xml',
+                destination: '/api/rss',
+            },
+            {
+                source: '/rss',
+                destination: '/api/rss',
+            },
+        ]
+    },
+    // Add headers for security and caching
+    async headers() {
+        return [
+            {
+                source: '/:path*',
+                headers: [
+                    {
+                        key: 'X-DNS-Prefetch-Control',
+                        value: 'on',
+                    },
+                    {
+                        key: 'X-XSS-Protection',
+                        value: '1; mode=block',
+                    },
+                    {
+                        key: 'X-Frame-Options',
+                        value: 'SAMEORIGIN',
+                    },
+                    {
+                        key: 'X-Content-Type-Options',
+                        value: 'nosniff',
+                    },
+                    {
+                        key: 'Referrer-Policy',
+                        value: 'origin-when-cross-origin',
+                    },
+                ],
+            },
+        ]
+    },
+}
+
+module.exports = nextConfig 
