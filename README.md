@@ -1,6 +1,25 @@
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.3-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react)](https://reactjs.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+[![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000?style=flat-square&logo=vercel)](https://vercel.com)
+
 # Omni-Channel Blog Platform
 
 A modern blog platform built with Next.js 14 that reads markdown files from a git repository and publishes to multiple platforms (website, LinkedIn, Medium, RSS).
+
+## ⭐ Support & Feedback
+
+If you find this project useful or interesting:
+
+### Show Your Support
+
+⭐ Star this repository to show your appreciation and help others discover it! ⭐
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/j_bhola)
+
+> Your support motivates me to create more open-source projects and educational content. Every star makes a difference and helps this project reach more developers!
 
 ## Features
 
@@ -35,7 +54,7 @@ A modern blog platform built with Next.js 14 that reads markdown files from a gi
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/open-blog-omni-sync.git
+git clone https://github.com/jatinderbhola/open-blog-omni-sync.git
 cd open-blog-omni-sync
 ```
 
