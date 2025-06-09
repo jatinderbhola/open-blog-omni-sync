@@ -1,15 +1,13 @@
 ---
 title: "Google's Engineering Manager Paradox: When Data Meets Corporate Reality"
 description: "An analysis of the complex relationship between data-driven decision making and corporate management at Google"
-date: "2024-03-21"
+date: "2025-05-21"
 tags: ["engineering management", "google", "corporate culture", "leadership", "data-driven", "productivity", "leadership", "psychology", "research", "data"
 ]
 published: true
 featured: true
 author: "Jatinder (Jay) Bhola"
 ---
-
-# Google's Engineering Manager Paradox: When Data Meets Corporate Reality
 
 ## The Contradiction That Shook Silicon Valley
 

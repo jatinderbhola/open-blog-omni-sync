@@ -8,8 +8,6 @@ featured: false
 author: "Jatinder (Jay) Bhola"
 ---
 
-# Getting Started with Next.js and Markdown
-
 Next.js is a powerful React framework that makes it easy to build fast, modern websites. In this post, we'll explore how to create a blog using Next.js and Markdown files.
 
 ## Why Next.js?
