@@ -24,10 +24,8 @@ export async function GET() {
 	const posts = await getAllPosts();
 
 	const fullPosts = await Promise.all(
-		posts.map(async (post, idx) => {
+		posts.map(async (post) => {
 			const fullPost = await getPostBySlug(post.slug);
-			// eslint-disable-next-line no-console
-			// console.log(`RSS DEBUG fullPosts[${idx}]:`, post.slug);
 			return fullPost;
 		})
 	);
