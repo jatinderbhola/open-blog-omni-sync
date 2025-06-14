@@ -22,12 +22,27 @@ function escapeXml(unsafe: string): string {
 
 export async function GET() {
 	const posts = await getAllPosts();
+
+	// Debug: Log the type and value of each post meta before fetching full posts
+	posts.forEach((post, idx) => {
+		// eslint-disable-next-line no-console
+		console.log(`RSS DEBUG posts[${idx}]:`, typeof post, post);
+	});
+
 	const fullPosts = await Promise.all(
-		posts.map(async (post) => {
+		posts.map(async (post, idx) => {
 			const fullPost = await getPostBySlug(post.slug);
+			// eslint-disable-next-line no-console
+			console.log(`RSS DEBUG fullPosts[${idx}]:`, typeof fullPost, fullPost);
 			return fullPost;
 		})
 	);
+
+	// Debug: Log the type and value of each post
+	fullPosts.forEach((post, idx) => {
+		// eslint-disable-next-line no-console
+		console.log(`RSS DEBUG [${idx}]:`, typeof post, post);
+	});
 
 	const rssXml = `<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="/rss-styles.xsl" type="text/xsl"?>
@@ -46,7 +61,7 @@ export async function GET() {
     <generator>Next.js RSS Generator</generator>
     <ttl>60</ttl>
     ${fullPosts
-			.filter((post) => post !== null)
+			.filter((post) => post !== null && typeof post === 'object')
 			.map(
 				(post) => `
     <item>
@@ -56,7 +71,7 @@ export async function GET() {
       <pubDate>${new Date(post!.date).toUTCString()}</pubDate>
       <guid isPermaLink="true">${SITE_CONFIG.url}/blog/${post!.slug}</guid>
       <dc:creator>${escapeXml(post!.author)}</dc:creator>
-      ${post!.tags.map((tag) => `<category>${escapeXml(tag)}</category>`).join('\n      ')}
+      ${Array.isArray(post!.tags) ? post!.tags.map((tag) => `<category>${escapeXml(tag)}</category>`).join('\n      ') : ''}
       <content:encoded><![CDATA[${post!.content}]]></content:encoded>
       <comments>${SITE_CONFIG.url}/blog/${post!.slug}#comments</comments>
     </item>`

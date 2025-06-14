@@ -16,10 +16,13 @@ export function formatDate(date: string | Date): string {
 
 export function slugify(text: string): string {
 	return text
+		.toString()
 		.toLowerCase()
-		.replace(/[^\w\s-]/g, '')
-		.replace(/[\s_-]+/g, '-')
-		.replace(/^-+|-+$/g, '');
+		.trim()
+		.replace(/\s+/g, '-')        // Replace spaces with -
+		.replace(/&/g, '-and-')      // Replace & with 'and'
+		.replace(/[^\w-]+/g, '')    // Remove all non-word chars
+		.replace(/--+/g, '-');     // Replace multiple - with single -
 }
 
 export function truncate(text: string, length: number): string {

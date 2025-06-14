@@ -105,6 +105,6 @@
 	@apply my-6 ml-6 list-decimal;
 }
 
-.prose :not(pre) > code {
+.prose :not(pre)>code {
 	@apply bg-muted rounded-md px-1.5 py-0.5 font-mono text-sm font-semibold;
 }

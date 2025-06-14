@@ -5,6 +5,10 @@ import { remark } from 'remark';
 import html from 'remark-html';
 import readingTime from 'reading-time';
 import { Post, PostFrontmatter, PostMeta, PostStatus } from '@/types/blog';
+import gfm from 'remark-gfm';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import slug from 'remark-slug';
+import autolinkHeadings from 'remark-autolink-headings';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 const draftsDirectory = path.join(process.cwd(), 'content/drafts');
@@ -35,11 +39,11 @@ function validateFrontmatter(data: Record<string, unknown>): PostFrontmatter {
 }
 
 export async function getPostBySlug(
-	slug: string,
+	postSlug: string,
 	status: PostStatus = 'published'
 ): Promise<Post | null> {
 	const directory = status === 'published' ? postsDirectory : draftsDirectory;
-	const fullPath = path.join(directory, `${slug}.md`);
+	const fullPath = path.join(directory, `${postSlug}.md`);
 
 	if (!fs.existsSync(fullPath)) {
 		return null;
@@ -48,11 +52,23 @@ export async function getPostBySlug(
 	const fileContents = fs.readFileSync(fullPath, 'utf8');
 	const { data, content } = matter(fileContents);
 
-	const processedContent = await remark().use(html).process(content);
+	// Debug: Check type of content before processing
+	if (typeof content !== 'string') {
+		// eslint-disable-next-line no-console
+		console.error(`BLOG DEBUG: Content for slug '${postSlug}' is not a string:`, content);
+		return null;
+	}
+
+	const processedContent = await remark()
+		.use(gfm)
+		.use(slug)
+		.use(autolinkHeadings, { behavior: 'wrap' })
+		.use(html)
+		.process(content);
 	const contentHtml = processedContent.toString();
 
 	const frontmatter = validateFrontmatter(data);
-	frontmatter.slug = slug;
+	frontmatter.slug = postSlug;
 	const stats = readingTime(content);
 
 	return {

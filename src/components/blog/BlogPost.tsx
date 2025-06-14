@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Post } from '@/types/blog';
 import { formatDate } from '@/lib/utils';
+import { AUTHOR_CONFIG } from '@/config/author';
 
 interface BlogPostProps {
 	post: Post;
@@ -18,9 +19,13 @@ export function BlogPost({ post }: BlogPostProps) {
 					{post.tags.length > 0 && (
 						<>
 							<span>·</span>
-							<div className="flex items-center gap-2">
-								{post.tags.map((tag) => (
-									<Link key={tag} href={`/tag/${tag}`} className="hover:text-foreground">
+							<div className="flex flex-wrap gap-2">
+								{post.tags.map((tag, index) => (
+									<Link
+										key={`${tag}-${index}`}
+										href={`/tag/${tag}`}
+										className="bg-gray-200 dark:bg-gray-700 rounded px-2 py-1 text-xs hover:text-foreground"
+									>
 										#{tag}
 									</Link>
 								))}
@@ -38,7 +43,7 @@ export function BlogPost({ post }: BlogPostProps) {
 						← Back to blog
 					</Link>
 					<Link
-						href={`https://github.com/yourusername/blog/edit/main/content/posts/${post.slug}.md`}
+						href={`https://github.com/${AUTHOR_CONFIG.social.github}/open-blog-omni-sync/edit/main/content/posts/${post.slug}.md`}
 						className="hover:text-foreground/80 text-sm font-medium"
 						target="_blank"
 						rel="noopener noreferrer"

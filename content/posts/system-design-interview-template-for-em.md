@@ -1,6 +1,6 @@
 ---
 title: 'Engineering Manager System Design Interview: Complete Guide'
-description: 'Master the LEADERS framework and ace your next EM system design interview*'
+description: 'Master the LEADERS framework and ace your next EM system design interview'
 date: '2025-06-14'
 tags:
   [
@@ -9,19 +9,6 @@ tags:
     'interview',
     'leadership',
     'architecture',
-    'scalability',
-    'framework',
-    'team-management',
-    'startup',
-    'technical-leadership',
-    'API-design',
-    'database',
-    'microservices',
-    'scaling',
-    'distributed-systems',
-    'performance',
-    'security',
-    'infrastructure',
     'cloud',
     'communication',
     'risk-management',
