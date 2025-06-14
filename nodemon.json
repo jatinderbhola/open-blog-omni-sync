@@ -1,0 +1,13 @@
+{
+    "watch": [
+        "content/**/*.md",
+        "src/**/*.{ts,tsx,js,jsx}",
+    ],
+    "ext": "ts,tsx,js,jsx,md,json,css",
+    "ignore": [
+        ".git",
+        "node_modules/**/node_modules",
+        ".next"
+    ],
+    "exec": "next build"
+}

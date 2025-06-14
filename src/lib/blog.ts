@@ -2,14 +2,13 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
-import html from 'remark-html';
+import gfm from 'remark-gfm';
+import remarkRehype from 'remark-rehype';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeStringify from 'rehype-stringify';
 import readingTime from 'reading-time';
 import { Post, PostFrontmatter, PostMeta, PostStatus } from '@/types/blog';
-import gfm from 'remark-gfm';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import slug from 'remark-slug';
-import autolinkHeadings from 'remark-autolink-headings';
-
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 const draftsDirectory = path.join(process.cwd(), 'content/drafts');
 
@@ -61,9 +60,17 @@ export async function getPostBySlug(
 
 	const processedContent = await remark()
 		.use(gfm)
-		.use(slug)
-		.use(autolinkHeadings, { behavior: 'wrap' })
-		.use(html)
+		.use(remarkRehype)
+		.use(rehypeSlug)
+		.use(rehypeAutolinkHeadings, {
+			behavior: 'prepend',
+			properties: { className: 'anchor' },
+			content: {
+				type: 'text',
+				value: '#'
+			}
+		})
+		.use(rehypeStringify)
 		.process(content);
 	const contentHtml = processedContent.toString();
 

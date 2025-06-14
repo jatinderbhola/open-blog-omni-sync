@@ -23,26 +23,14 @@ function escapeXml(unsafe: string): string {
 export async function GET() {
 	const posts = await getAllPosts();
 
-	// Debug: Log the type and value of each post meta before fetching full posts
-	posts.forEach((post, idx) => {
-		// eslint-disable-next-line no-console
-		console.log(`RSS DEBUG posts[${idx}]:`, typeof post, post);
-	});
-
 	const fullPosts = await Promise.all(
 		posts.map(async (post, idx) => {
 			const fullPost = await getPostBySlug(post.slug);
 			// eslint-disable-next-line no-console
-			console.log(`RSS DEBUG fullPosts[${idx}]:`, typeof fullPost, fullPost);
+			// console.log(`RSS DEBUG fullPosts[${idx}]:`, post.slug);
 			return fullPost;
 		})
 	);
-
-	// Debug: Log the type and value of each post
-	fullPosts.forEach((post, idx) => {
-		// eslint-disable-next-line no-console
-		console.log(`RSS DEBUG [${idx}]:`, typeof post, post);
-	});
 
 	const rssXml = `<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="/rss-styles.xsl" type="text/xsl"?>

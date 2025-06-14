@@ -19,11 +19,6 @@ featured: true
 author: 'Jatinder (Jay) Bhola'
 ---
 
-# Engineering Manager System Design Interview: Complete Guide
-
-_Master the LEADERS framework and ace your next EM system design interview_
-
----
 
 ## Table of Contents
 
