@@ -22,7 +22,7 @@ export function Toast({ message, type = 'success', duration = 3000, onClose }: T
 	return (
 		<div
 			className={cn(
-				'fixed bottom-4 right-4 z-50 rounded-lg px-4 py-2 text-sm font-medium shadow-lg',
+				'fixed right-4 bottom-4 z-50 rounded-lg px-4 py-2 text-sm font-medium shadow-lg',
 				type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
 			)}
 			role="alert"
